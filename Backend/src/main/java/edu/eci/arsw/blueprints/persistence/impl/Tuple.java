@@ -36,20 +36,10 @@ public class Tuple<T1, T2> {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Tuple<?, ?> other = (Tuple<?, ?>) obj;
-        if (!Objects.equals(this.o1, other.o1) || !Objects.equals(this.o2, other.o2)) {
-            return false;
-        }
-        return true;
+        return this == obj || (obj != null
+                && getClass() == obj.getClass()
+                && Objects.equals(this.o1, ((Tuple<?, ?>) obj).o1)
+                && Objects.equals(this.o2, ((Tuple<?, ?>) obj).o2));
     }
     
     

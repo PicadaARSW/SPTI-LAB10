@@ -23,7 +23,7 @@ public class BluePrintController {
 
 
     private final BlueprintsServices bps;
-    private final String ERROROCURRED = "An error occurred.";
+    private final static String errorFind = "An error occurred.";
 
 
     /**
@@ -49,7 +49,7 @@ public class BluePrintController {
         } catch (BlueprintNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Blueprint not found: " + author + "/" + name);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ERROROCURRED);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorFind);
         }
     }
 
@@ -67,7 +67,7 @@ public class BluePrintController {
         } catch (BlueprintNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Blueprints not found for author: " + author);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ERROROCURRED);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorFind);
         }
     }
 
@@ -115,7 +115,7 @@ public class BluePrintController {
         } catch (BlueprintNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Blueprint not found: " + author + "/" + name);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ERROROCURRED);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorFind);
         }
     }
 }
