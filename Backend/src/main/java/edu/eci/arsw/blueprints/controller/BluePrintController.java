@@ -23,7 +23,6 @@ public class BluePrintController {
 
 
     private final BlueprintsServices bps;
-    private final static String errorFind = "An error occurred.";
 
 
     /**
@@ -43,13 +42,13 @@ public class BluePrintController {
      */
     @GetMapping("/{author}/{name}")
     @Operation(summary = "Obtener un blueprint por autor y nombre", description = "Devuelve un blueprint basado en su autor y nombre.")
-    public ResponseEntity<?> getBlueprint(@PathVariable("author") String author, @PathVariable("name") String name) {
+    public ResponseEntity<Blueprint> getBlueprint(@PathVariable("author") String author, @PathVariable("name") String name) {
         try {
             return ResponseEntity.ok(bps.getBlueprint(author, name));
         } catch (BlueprintNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Blueprint not found: " + author + "/" + name);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorFind);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 
@@ -60,14 +59,14 @@ public class BluePrintController {
      */
     @GetMapping("/{author}")
     @Operation(summary = "Obtener todos los blueprints de un autor", description = "Devuelve una lista de blueprints pertenecientes a un autor específico.")
-    public ResponseEntity<?> getBlueprintByAuthor(@PathVariable("author") String author) {
+    public ResponseEntity<Set<Blueprint>> getBlueprintByAuthor(@PathVariable("author") String author) {
         try {
             Set<Blueprint> blueprints = bps.getBlueprintsByAuthor(author);
             return ResponseEntity.ok(blueprints);
         } catch (BlueprintNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Blueprints not found for author: " + author);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorFind);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 
@@ -78,8 +77,8 @@ public class BluePrintController {
      */
     @PostMapping
     @Operation(summary = "Registrar un nuevo blueprint", description = "Añade un nuevo blueprint al sistema.")
-    public ResponseEntity<?> registerBlueprint(@RequestBody Blueprint bp){
-        HashMap<String, Object> response = new HashMap<>();
+    public ResponseEntity<Map<String, Object>> registerBlueprint(@RequestBody Blueprint bp) {
+        Map<String, Object> response = new HashMap<>();
         try {
             bps.addNewBlueprint(bp);
             response.put("status", "success");
@@ -90,14 +89,15 @@ public class BluePrintController {
         }
     }
 
+
     /**
      * Obtiene todos los blueprints disponibles en el sistema.
      * @return Conjunto de blueprints.
      */
     @GetMapping
     @Operation(summary = "Obtener todos los blueprints", description = "Devuelve una lista de todos los blueprints registrados en el sistema.")
-    public Set<Blueprint> getAllBlueprints(){
-        return bps.getAllBlueprints();
+    public ResponseEntity<Set<Blueprint>> getAllBlueprints() {
+        return ResponseEntity.ok(bps.getAllBlueprints());
     }
 
     /**
@@ -109,13 +109,13 @@ public class BluePrintController {
      */
     @PutMapping("/{author}/{name}")
     @Operation(summary = "Actualizar un blueprint", description = "Modifica los datos de un blueprint existente.")
-    public ResponseEntity<?> updateBlueprint(@PathVariable("author") String author, @PathVariable("name") String name, @RequestBody Blueprint blueprint) {
+    public ResponseEntity<Blueprint> updateBlueprint(@PathVariable("author") String author, @PathVariable("name") String name, @RequestBody Blueprint blueprint) {
         try {
             return ResponseEntity.ok(bps.updateBlueprint(author, name, blueprint));
         } catch (BlueprintNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Blueprint not found: " + author + "/" + name);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorFind);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 }
