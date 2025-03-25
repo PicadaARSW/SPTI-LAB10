@@ -1,5 +1,5 @@
 ### Escuela Colombiana de Ingeniería
-### Arquiecturas de Software
+### Materia origen: Arquitectura de Software
 
 ## Construción de un cliente 'grueso' con un API REST, HTML5, Javascript y CSS3. Parte I.
 
@@ -71,4 +71,12 @@ Comando para correr el back
 ```
 mvn spring-boot:run
 ```
+
+##
+Analisis SonarCloud
+![image](https://github.com/user-attachments/assets/957b58c1-6a3f-4f95-8136-608e90188339)
+
+
+Analisis SNYK
+![image](https://github.com/user-attachments/assets/9176466f-25a0-45a2-8886-f39b756a5da2)
 
