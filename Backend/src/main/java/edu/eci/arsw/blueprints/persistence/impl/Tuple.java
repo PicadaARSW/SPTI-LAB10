@@ -46,10 +46,7 @@ public class Tuple<T1, T2> {
             return false;
         }
         final Tuple<?, ?> other = (Tuple<?, ?>) obj;
-        if (!Objects.equals(this.o1, other.o1)) {
-            return false;
-        }
-        if (!Objects.equals(this.o2, other.o2)) {
+        if (!Objects.equals(this.o1, other.o1) || !Objects.equals(this.o2, other.o2)) {
             return false;
         }
         return true;

@@ -103,7 +103,7 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
     public Set<Blueprint> getAllBluePrints(){
         Set<Blueprint> blueprintSet = new HashSet<>();
 
-        for (Tuple<String, String> i : blueprints.keySet()){
+        for (Map.Entry<Tuple<String, String>, Blueprint> i : blueprints.entrySet()){
             blueprintSet.add(blueprints.get(i));
         }
 

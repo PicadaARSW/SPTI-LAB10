@@ -18,11 +18,6 @@ public class Blueprint {
         this.name=name;
         points=Arrays.asList(pnts);
     }
-         
-    public Blueprint(String author, String name){
-        this.name=name;
-        points=new ArrayList<>();
-    }
 
     public Blueprint() {
     }    
@@ -50,8 +45,7 @@ public class Blueprint {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        return hash;
+        return 7;
     }
 
     public void setAuthor(String author) {

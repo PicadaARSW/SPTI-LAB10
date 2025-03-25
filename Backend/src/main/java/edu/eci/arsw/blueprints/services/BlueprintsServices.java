@@ -14,11 +14,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class BlueprintsServices {
    
-    @Autowired
+
     BlueprintsPersistence bpp;
 
-    @Autowired
+
     private Filter filter;
+
+    /**
+     * Constructor de la clase.
+     */
+    @Autowired
+    public BlueprintsServices(BlueprintsPersistence bpp, Filter filter){
+        this.bpp = bpp;
+        this.filter = filter;
+    }
 
     /**
      * Agrega un nuevo blueprint al sistema.

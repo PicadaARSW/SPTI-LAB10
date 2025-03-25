@@ -21,13 +21,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Tag(name = "Blueprints", description = "API para gestionar blueprints")
 public class BluePrintController {
 
-    @Autowired
+
     private final BlueprintsServices bps;
+    private final String ERROROCURRED = "An error occurred.";
+
 
     /**
      * Constructor de BluePrintController.
      * @param bps Servicio de blueprints inyectado.
      */
+    @Autowired
     public BluePrintController(BlueprintsServices bps) {
         this.bps = bps;
     }
@@ -46,7 +49,7 @@ public class BluePrintController {
         } catch (BlueprintNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Blueprint not found: " + author + "/" + name);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ERROROCURRED);
         }
     }
 
@@ -64,7 +67,7 @@ public class BluePrintController {
         } catch (BlueprintNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Blueprints not found for author: " + author);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ERROROCURRED);
         }
     }
 
@@ -112,7 +115,7 @@ public class BluePrintController {
         } catch (BlueprintNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Blueprint not found: " + author + "/" + name);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred.");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ERROROCURRED);
         }
     }
 }
